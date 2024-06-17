@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homa Bay County Map with Custom Popups</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Homa Bay County Map with Custom Popups</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map and set its view to Homa Bay County, Kenya
+        var map = L.map('map').setView([-0.5273, 34.4571], 10);
+
+        // Add a tile layer from OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Example marker with a custom popup
+        var marker = L.marker([-0.5273, 34.4571]).addTo(map);
+        marker.bindPopup("<b>Homa Bay Town</b><br>The capital of Homa Bay County.").openPopup();
+
+        // Additional marker with customized HTML content in the popup
+        var marker2 = L.marker([-0.4011, 34.2001]).addTo(map);
+        var customPopup = `
+            <div style="text-align: center;">
+                <h2>Ruma National Park</h2>
+                <p>Known for its diverse wildlife and bird species.</p>
+                <img src="https://example.com/ruma.jpg" alt="Ruma National Park" width="100%">
+            </div>
+        `;
+        marker2.bindPopup(customPopup);
+
+        // Another example marker
+        var marker3 = L.marker([-0.6197, 34.2239]).addTo(map);
+        marker3.bindPopup("<b>Mbita</b><br>A town on the shores of Lake Victoria.").openPopup();
+
+        // You can also add popups without markers
+        var popup = L.popup()
+            .setLatLng([-0.4795, 34.2018])
+            .setContent("I am a standalone popup in Homa Bay County.")
+            .openOn(map);
+    </script>
+</body>
+</html>
